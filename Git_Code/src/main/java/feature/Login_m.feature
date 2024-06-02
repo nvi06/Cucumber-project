@@ -1,11 +1,5 @@
 Feature: Login scenario
-
-  Scenario: Test login page with valid credentials
-    Given : User is already on login page
-    When : User enter username and password
-    Then : User click on login button
-    And : User is on home page
-    
+  
     Scenario: Test login page with invalid username valid password
     Given User is on login page
     When user enter invalid username and valid password
@@ -29,7 +23,21 @@ Feature: Login scenario
     When user forget to enter username and password
     Then User clicked on Login Button
     And User get popup 
-
+    
+    Scenario: Test login page with valid credentials
+    Given : User is already on login page
+    When : User enter username and password
+    Then : User click on login button
+    And : User is on home page
+    
+    Scenario: After Login page validate Skills on Admin Dropdown
+    Given User is on Login_page and put valid credentials for login
+    When user clicked on login button user relocate to home page
+    And user hover on Admin dropdown
+    Then user hover on Skills and click skills
+    And user is on Skills page
+    
+    
   #@Smoke
   #Scenario Outline: Test login page with credentials
     #Given User is already on Login page

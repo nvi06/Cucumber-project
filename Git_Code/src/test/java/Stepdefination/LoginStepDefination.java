@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,6 +13,7 @@ import io.cucumber.java.en.When;
 
 public class LoginStepDefination {
 	WebDriver driver = new ChromeDriver();
+	Actions ac = new Actions(driver);
 	
 	@Given("User is on login page")
 	public void user_is_on_login_page() {
@@ -31,6 +33,7 @@ public class LoginStepDefination {
 	public void user_get_message() {
 		boolean User_inputtxt = driver.findElement(By.cssSelector("input[name=txtUserName]")).isDisplayed();
 		Assert.assertEquals(true, User_inputtxt);
+		driver.quit();
 	    
 	}
 	
@@ -55,6 +58,7 @@ public class LoginStepDefination {
 	public void User_get_message() {
 		boolean User_inputtxt = driver.findElement(By.cssSelector("input[name=txtUserName]")).isDisplayed();
 		Assert.assertEquals(true, User_inputtxt);
+		driver.quit();
 	}
 
 	@Given("User is on Login page")
@@ -77,6 +81,7 @@ public class LoginStepDefination {
 	public void user_get_Message() {
 		boolean User_inputtxt = driver.findElement(By.cssSelector("input[name=txtUserName]")).isDisplayed();
 		Assert.assertEquals(true, User_inputtxt);
+		driver.quit();
 	}
 	
 	@Given("User is on Login Page")
@@ -99,14 +104,10 @@ public class LoginStepDefination {
 	   driver.switchTo().alert().accept();
 	   boolean User_inputtxt = driver.findElement(By.cssSelector("input[name=txtUserName]")).isDisplayed();
 		Assert.assertEquals(true, User_inputtxt);
+		driver.quit();
 	}
 
 
-
-
-	
-	
-	
 	@Given(": User is already on login page")
 	public void user_is_already_on_login_page() {
 	    driver.get("http://182.76.176.205/hrm/login.php");
@@ -127,7 +128,40 @@ public class LoginStepDefination {
 	public void user_is_on_home_page() {
 		boolean admin_E = driver.findElement(By.cssSelector("li[id=admin]")).isDisplayed();
 		Assert.assertEquals(true, admin_E);
+		driver.quit();
 			
+	}
+	
+	@Given("User is on Login_page and put valid credentials for login")
+	public void user_is_on_login_page_and_put_valid_credentials_for_login() {
+		driver.get("http://182.76.176.205/hrm/login.php");
+		driver.findElement(By.cssSelector("input[name=txtUserName]")).sendKeys("admin");
+		driver.findElement(By.cssSelector("input[name=txtPassword")).sendKeys("admin");
+	    
+	}
+	@When("user clicked on login button user relocate to home page")
+	public void user_clicked_on_login_button_user_relocate_to_home_page() {
+		driver.findElement(By.cssSelector("input[name=Submit")).click();
+	    
+	}
+	@When("user hover on Admin dropdown")
+	public void user_hover_on_admin_dropdown() {
+	    WebElement Admin_e = driver.findElement(By.cssSelector("li[id=admin]"));
+	    ac.moveToElement(Admin_e).build().perform();
+	}
+	@Then("user hover on Skills and click skills")
+	public void user_hover_on_skills_and_click_skills() {
+	    WebElement  Skills_e = driver.findElement(By.cssSelector("a.skills"));
+	    ac.moveToElement(Skills_e).build().perform();
+	    driver.findElement(By.xpath("//*[@class=\"skills\"]/*[text()=\"Skills\"]")).click();
+	}
+	@Then("user is on Skills page")
+	public void user_is_on_skills_page() {
+	    WebElement Move_to_frame = driver.findElement(By.id("rightMenu"));
+	    driver.switchTo().frame(Move_to_frame);
+	    boolean search_for =driver.findElement(By.cssSelector("input[name=loc_name]")).isDisplayed();
+	    Assert.assertEquals(true, search_for);
+	    driver.quit();
 	}
 	
 	

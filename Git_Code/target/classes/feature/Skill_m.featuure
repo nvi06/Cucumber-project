@@ -1,0 +1,5 @@
+Feature: Skill_M
+Scenario: Business rule through list of steps with arguments.
+Given: Some precondition step
+When: Some key actions
+Then: To observe outcomes or validation
